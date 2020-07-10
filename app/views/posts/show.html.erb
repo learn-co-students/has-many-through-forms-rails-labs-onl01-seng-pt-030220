@@ -12,7 +12,7 @@
 <h5>Comments:</h5>
 <ul>
   <% @post.comments.each do |comment| %>
-    <p><%= comment.content %> - <%= comment.user.username %><p>
+    <p><%= "#{comment.user.username} says: #{comment.content}"%><p>
   <% end %>
 </ul>
 
@@ -23,4 +23,6 @@
     <li><%= link_to commentor.username, user_path(commentor) %></li>
   <% end %>
 </ul>
+
+<%= render "comment_form", comment: @post.comments.build, post_id: @post.id %>
 

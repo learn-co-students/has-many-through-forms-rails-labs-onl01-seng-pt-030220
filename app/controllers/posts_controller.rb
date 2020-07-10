@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
+    #one of avi's least favorite patterns ingroduced by DHH
     params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name])
   end
 end
