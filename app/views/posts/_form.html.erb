@@ -30,9 +30,18 @@
   <% end %>
 <%# will generate a checkbox named post[category_ids][] for each category in Category.all%>
 <%# it will use the :id as the valuefor the checkbox and it will use the :name method as the label for the checkbox %>
-    <%= f.fields_for :categories, post.categories.build do |c| %>
-        <%= c.text_field :name, placeholder: "Cateogry Name" %>
-    <%end%>
+    <%#= f.fields_for :categories, post.categories.build do |c| %>
+        <%#= c.text_field :name, placeholder: "Cateogry Name" %>
+    <%#end%>
+    <%= f.fields_for :categories do |category_builder| %>
+      <%= category_builder.text_field :name %>
+    <% end %>
+
+    <%# if you comment out the method for categories_attributes in the post model, it changes the structure of the params. why?
+    # 1. f is attached to the post
+    # 2. the fields_for method looks to see if the object (post) attached to f respondsto a method called categories_attributes=
+    # 3a. if the underlying object (post) does respond to that method, fields_for knows you're buildinga nested form
+    # 3b. if the underlying object does not respond to that method, field_for assumes you're doing something custom %>
 
 <%= f.submit %>
 
