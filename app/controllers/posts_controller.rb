@@ -9,6 +9,10 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    # 3.times do
+    #   @post.categories.build(:name => "Sample Category")
+    # end
+    @post.categories.build
   end
 
   def create
@@ -19,6 +23,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
+    #one of avi's least favorite patterns ingroduced by DHH
     params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name])
   end
 end
