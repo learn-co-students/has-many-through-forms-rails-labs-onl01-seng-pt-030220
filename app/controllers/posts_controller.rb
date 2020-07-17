@@ -1,10 +1,13 @@
 class PostsController < ApplicationController
-  def show
-    @post = Post.find(params[:id])
-  end
-
+  
   def index
     @posts = Post.all
+  end
+  
+  def show
+    @post = Post.find(params[:id])
+    @user = User.new
+    @comment = Comment.new(user: @user)
   end
 
   def new
@@ -19,6 +22,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name])
+    params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:id, :name], user_attributes: [:id, :username])
   end
 end
