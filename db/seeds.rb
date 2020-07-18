@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+
+p = Post.create(title: "animals", content: ",i love beef ,animals make me happe,because of thier meat ")
+p.categories.build(name: "animal")

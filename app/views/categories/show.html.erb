@@ -1,0 +1,5 @@
+
+<%=@category.post_categories.each do |post_cat|%>
+<%=link_to post_cat.post.title,post_path(post_cat.post)%><br>
+<%=post_cat.post.content%><br>
+<%end%>
