@@ -4,21 +4,21 @@
 <%=a.name%>
 <%end%>
 
-<%=@post.comments.each do |a|%>
-<%=a.user.username%> says: 
-<%=a.content%>
+<%=@post.comments.each do |comment|%>
+<%=comment.user.username%> says: 
+<%=comment.content%>
 <%end%>
 
 <%=form_for @post.comments.build do |a| %>
+<%=a.hidden_field :post_id, value: @post.id %>
 <%=a.label :content %>
 <%=a.text_field :content %>
 <%=a.collection_select :user_id, User.all, :id, :username %>
-<%=a.fields_for :users do |b| %>
+<%=a.fields_for :user, User.new do |b| %>
 <%=b.text_field :username %>
 <%=b.text_field :email %>
 <%=b.submit%>
 <%end%>
-<%=a.hidden_field :post_id, value: @post.id %>
 <%=a.submit%>
 <%end%>
 

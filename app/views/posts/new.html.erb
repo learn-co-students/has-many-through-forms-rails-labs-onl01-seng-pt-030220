@@ -7,8 +7,7 @@
 
 <%= f.fields_for :categories, @post.categories.build do |a|%>
 <%= a.text_field :name %>
-
+<%= a.submit%>
 <%end%>
-
 <%=f.submit%>
 <%end%>

@@ -3,17 +3,16 @@ class Post < ActiveRecord::Base
   has_many :categories, through: :post_categories
   has_many :comments
   has_many :users, through: :comments
-  accepts_nested_attributes_for :categories, reject_if: :category_blank?
+  accepts_nested_attributes_for :categories
 
-  def categories_attributes=(argument)
-    argument.values.each do |category_attribute|
+  def categories_attributes=(argument_hash)
+      argument_hash.values.each do |category_attribute|
+      if !category_attribute[:name].empty?
       category = Category.find_or_create_by(category_attribute)
       self.categories << category
+      end
     end
   end
 
-  def category_blank?(argument)
-  argument['name'].blank?
-  end
 
 end
