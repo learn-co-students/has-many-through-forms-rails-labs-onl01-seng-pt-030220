@@ -1,1 +1,29 @@
+<%=@post.title%>
+<%=@post.content%>
+<%@post.categories.each do |a|%>
+<%=a.name%>
+<%end%>
 
+<%=@post.comments.each do |a|%>
+<%=a.user.username%> says: 
+<%=a.content%>
+<%end%>
+
+<%=form_for @post.comments.build do |a| %>
+<%=a.label :content %>
+<%=a.text_field :content %>
+<%=a.collection_select :user_id, User.all, :id, :username %>
+<%=a.fields_for :users do |b| %>
+<%=b.text_field :username %>
+<%=b.text_field :email %>
+<%=b.submit%>
+<%end%>
+<%=a.hidden_field :post_id, value: @post.id %>
+<%=a.submit%>
+<%end%>
+
+
+<%=@post.users.uniq.each do |a|%>
+<%= link_to a.username, user_path(a.id) %>
+
+<%end%>
