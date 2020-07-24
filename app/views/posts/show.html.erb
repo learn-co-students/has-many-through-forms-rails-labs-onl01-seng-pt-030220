@@ -1,1 +1,26 @@
 
+<%= @post.title %>
+<br>
+<%= @post.content %>
+<br>
+<h3> Categories </h3>
+<ul>
+<% @post.categories.each do |category| %>
+    <li><%= category.name%></li>
+<% end %>
+</ul>
+<br>
+<h3> Comments </h3>
+<ul>
+<% @post.comments.each do |comment| %>
+    <li><%= comment.content %></li>
+<% end %>
+</ul>
+<h3> Unique Users </h3>
+<ul> 
+<%= @post.users.uniq.each do |user| %>  
+   <li> <%= link_to user.username, user %> </li>
+<% end %>
+</ul>
+
+
