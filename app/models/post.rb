@@ -7,8 +7,8 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :categories, reject_if: :all_blank
 
 
-  def comments_attributes=(comments_attributes) 
-    comments_attributes.values.each do |attr|
+  def comments_attributes=(comment_attributes) 
+    comment_attributes.values.each do |attr|
       comment = Comment.find_or_create_by(attr)
       self.comment_attributes.build(comment: comment) 
     end
