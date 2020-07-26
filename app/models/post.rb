@@ -4,13 +4,13 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :users, through: :comments
 
-  #accepts_nested_attributes_for, reject_if: :all_blank
+  accepts_nested_attributes_for :categories, reject_if: :all_blank
 
 
-  def categories_attributes=(attributes) 
-    attributes.values.each do |attr|
-      category = Category.find_or_create_by(attr)
-      self.categories << category
+  def comments_attributes=(comments_attributes) 
+    comments_attributes.values.each do |attr|
+      comment = Comment.find_or_create_by(attr)
+      self.comment_attributes.build(comment: comment) 
     end
   end
  
