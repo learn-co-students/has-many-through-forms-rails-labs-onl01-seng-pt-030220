@@ -1,1 +1,35 @@
+<h1><%= @post.title %></h1>
 
+<br>
+
+<h2>Post Content:</h2>
+<h3><%= @post.content %></h3>
+
+<br>
+
+<h2>Categories:</h2>
+<ul>
+  <% @post.categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
+</ul>
+
+<br>
+
+<h2>Comments:</h2>
+<ul>
+    <%= @post.comments.each do |comment| %>
+        <li><%= "#{comment.user.username} says: #{comment.content}" %></li>
+    <% end %>
+</ul>
+
+<br>
+
+<h2>Commentors:</h2>
+<ul>
+    <%= @post.commentors.each do |commentor| %>
+        <li><%= link_to commentor.username, user_path(commentor) %></li>
+    <% end %>
+</ul>
+
+<%= render "comment_form", comment: @post.comments.build, post_id: @post.id %>
